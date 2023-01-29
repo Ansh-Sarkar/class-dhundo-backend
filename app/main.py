@@ -13,17 +13,16 @@ def generatePDF():
     _e1_teacher = request.args.get('_e1_teacher')
     _e2_code = request.args.get('_e2_code')
     _e2_teacher = request.args.get('_e2_teacher')
-    
-    pdfPattern = "app/*.pdf"
-    files = glob.glob(pdfPattern)
-    print(files)
-    # for file in files:
-    #     os.remove(file)
+
+    for parent, dirnames, filenames in os.walk('.'):
+        for fn in filenames:
+            if fn.lower().endswith('.pdf'):
+                os.remove(os.path.join(parent, fn))
     
     pdfName = TimeTableCreator(_branch, _section, _e1_code, _e1_teacher, _e2_code, _e2_teacher, rows)
-    print("Aaaaaaaaaaaaaaaaaaaaa pdfName : ", pdfName)
+    print("pdfName : ", pdfName)
     print(os.listdir())
-    return send_file("/app/" + pdfName, as_attachment=True)
+    return send_file("../" + pdfName, as_attachment=True)
 
 @app.route('/download')
 def downloadFile():
@@ -50,7 +49,7 @@ def formData():
     _e1_teacher, _e2_teacher = _elective1[1], _elective2[1]
     _e1_code, _e2_code = _elective1[0].split('_')[0], _elective2[0].split('_')[0]
     
-    return redirect(f"https://dhundo.herokuapp.com/generateTimeTable?_branch={_branch}&_section={_section}&_e1_code={_e1_code}&_e1_teacher={_e1_teacher}&_e2_code={_e2_code}&_e2_teacher={_e2_teacher}", code = 302)
+    return redirect(f"http://127.0.0.1:5000/generateTimeTable?_branch={_branch}&_section={_section}&_e1_code={_e1_code}&_e1_teacher={_e1_teacher}&_e2_code={_e2_code}&_e2_teacher={_e2_teacher}", code = 302)
     
 
 import csv
