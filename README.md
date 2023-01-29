@@ -12,7 +12,7 @@
 - [x] Developed on Ubuntu 22.04
 
 
-## Setting up Virtual Environment
+## Setting up Virtual Environment and Server
 
 <br>
 
