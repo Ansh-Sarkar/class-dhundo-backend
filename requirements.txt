@@ -16,7 +16,7 @@ pandas==1.4.3
 Pillow==9.2.0
 pyparsing==3.0.9
 python-dateutil==2.8.2
-pytz==2022.1
+pytz==2022.1a
 six==1.16.0
 Werkzeug==2.1.2
 zipp==3.8.1
